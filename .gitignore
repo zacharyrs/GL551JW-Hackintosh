@@ -30,5 +30,5 @@ Temporary Items
 kexts/*
 
 # Serials for custom patcher
-# serials.py
+serials.sh
 *.plist
