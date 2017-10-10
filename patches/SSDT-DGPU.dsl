@@ -5,25 +5,29 @@ DefinitionBlock ("", "SSDT", 2, "hack", "DGPU", 0)
     External(_SB.PCI0, DeviceObj)
     Scope(_SB.PCI0)
     {
-        External(PEG0.PEGP, DeviceObj)
-        Scope(PEGP.PEGP)
+        External(PEG0, DeviceObj)
+        Scope(PEG0)
         {
-            External(CTXT, IntObj)
-            External(GPRF, IntObj)
-            External(VGAB, BuffObj)
-            External(VGAR, FieldUnitObj)
-            External(SGOF, MethodObj)
-            Method (_OFF, 0, Serialized)
+            External(PEGP, DeviceObj)
+            Scope(PEGP)
             {
-                If (CTXT == Zero)
-                {
-                    If ( GPRF != One)
+                External(CTXT, IntObj)
+                External(GPRF, IntObj)
+                External(VGAB, BuffObj)
+                External(VGAR, FieldUnitObj)
+                External(SGOF, MethodObj)
+                Method (_OFF, 0, Serialized)
+                { 
+                    If (CTXT == Zero)
                     {
-                        VGAB = VGAR
+                        If ( GPRF != One)
+                        {
+                            VGAB = VGAR
+                        }
+                        CTXT = One
                     }
-                    CTXT = One
+                    SGOF ()
                 }
-                SGOF ()
             }
         }
         

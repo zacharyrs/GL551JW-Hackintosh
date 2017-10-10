@@ -2,21 +2,17 @@
 
 DefinitionBlock("", "SSDT", 2, "hack", "HDAU", 0)
 {   
-    External(_SB.PCI0, DeviceObj)
-    Scope(_SB.PCI0)
+    External(_SB.PCI0.HDAU, DeviceObj)
+    Scope(_SB.PCI0.HDAU)
     {
-        External(HDAU, DeviceObj)
-        Scope(HDAU)
+        Method(_DSM, 4)
         {
-            Method(_DSM, 4)
+            If (!Arg2) { Return (Buffer() { 0x03 } ) }
+            Return(Package()
             {
-                If (!Arg2) { Return (Buffer() { 0x03 } ) }
-                Return(Package()
-                {
-                    "layout-id", Buffer() { 3, 0, 0, 0 },
-                    "hda-gfx", Buffer() { "onboard-1" },
-                })
-            }
+                "layout-id", Buffer() { 3, 0, 0, 0 },
+                "hda-gfx", Buffer() { "onboard-1" },
+            })
         }
     }
 }

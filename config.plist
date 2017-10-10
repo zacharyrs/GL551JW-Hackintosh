@@ -283,6 +283,7 @@
 			<string>SSDT-LPC.aml</string>
 			<string>SSDT-DGPU.aml</string>
 			<string>SSDT-IGPU.aml</string>
+			<string>SSDT-HDEF.aml</string>
 			<string>SSDT-HDAU.aml</string>
 			<string>SSDT-BATT.aml</string>
 			<string>SSDT-PS2K.aml</string>
@@ -314,11 +315,6 @@
 	</dict>
 	<key>Devices</key>
 	<dict>
-		<key>Audio</key>
-		<dict>
-			<key>Inject</key>
-			<string>3</string>
-		</dict>
 		<key>USB</key>
 		<dict>
 			<key>AddClockID</key>
@@ -331,55 +327,6 @@
 	</dict>
 	<key>GUI</key>
 	<dict>
-		<key>Custom</key>
-		<dict>
-			<key>Entries</key>
-			<array>
-				<dict>
-					<key>Disabled</key>
-					<false/>
-					<key>FullTitle</key>
-					<string>OSX</string>
-					<key>Hidden</key>
-					<false/>
-					<key>Hotkey</key>
-					<string>3</string>
-					<key>Ignore</key>
-					<false/>
-					<key>InjectKexts</key>
-					<string>Detect</string>
-					<key>NoCaches</key>
-					<false/>
-					<key>SubEntries</key>
-					<array>
-						<dict>
-							<key>AddArguments</key>
-							<string>-x</string>
-							<key>FullTitle</key>
-							<string>Safemode</string>
-						</dict>
-						<dict>
-							<key>AddArguments</key>
-							<string>-s</string>
-							<key>FullTitle</key>
-							<string>Single User Mode</string>
-						</dict>
-						<dict>
-							<key>AddArguments</key>
-							<string>-v</string>
-							<key>FullTitle</key>
-							<string>Verbose</string>
-						</dict>
-					</array>
-					<key>Type</key>
-					<string>OSX</string>
-					<key>Volume</key>
-					<string>E3A0A094-FEC2-4623-BE6A-E5C99E94BED6</string>
-					<key>VolumeType</key>
-					<string>Internal</string>
-				</dict>
-			</array>
-		</dict>
 		<key>Language</key>
 		<string>en:0</string>
 		<key>Mouse</key>
@@ -396,7 +343,7 @@
 		<key>Scan</key>
 		<dict>
 			<key>Entries</key>
-			<false/>
+			<true/>
 			<key>Legacy</key>
 			<false/>
 			<key>Linux</key>
@@ -406,8 +353,6 @@
 		</dict>
 		<key>ScreenResolution</key>
 		<string>1024x768</string>
-		<key>Theme</key>
-		<string>minimal</string>
 	</dict>
 	<key>Graphics</key>
 	<dict>
@@ -538,6 +483,8 @@
 		<string>0x28</string>
 		<key>CsrActiveConfig</key>
 		<string>0x3FF</string>
+		<key>ROM</key>
+		<string>UseMacAddr0</string>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
@@ -571,40 +518,6 @@
 		<string>Part Component</string>
 		<key>Manufacturer</key>
 		<string>Apple Inc.</string>
-		<key>Memory</key>
-		<dict>
-			<key>Modules</key>
-			<array>
-				<dict>
-					<key>Frequency</key>
-					<integer>1600</integer>
-					<key>Part</key>
-					<string>M471B1G73DB0-YK0</string>
-					<key>Size</key>
-					<integer>8192</integer>
-					<key>Slot</key>
-					<integer>0</integer>
-					<key>Type</key>
-					<string>DDR3</string>
-					<key>Vendor</key>
-					<string>Samsung</string>
-				</dict>
-				<dict>
-					<key>Frequency</key>
-					<integer>1600</integer>
-					<key>Part</key>
-					<string>M471B1G73DB0-YK0</string>
-					<key>Size</key>
-					<integer>8192</integer>
-					<key>Slot</key>
-					<integer>2</integer>
-					<key>Type</key>
-					<string>DDR3</string>
-					<key>Vendor</key>
-					<string>Samsung</string>
-				</dict>
-			</array>
-		</dict>
 		<key>Mobile</key>
 		<true/>
 		<key>PlatformFeature</key>
