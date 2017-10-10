@@ -28,3 +28,7 @@ Temporary Items
 
 # Downloaded kexts
 kexts/*
+
+# Serials for custom patcher
+# serials.py
+*.plist

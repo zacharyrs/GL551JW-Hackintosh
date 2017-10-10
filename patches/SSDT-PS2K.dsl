@@ -1,45 +1,41 @@
 // Keyboard configuration
+// Only necessary if using ApplePS2SmartTouchpad + AsusNBFnKeys
 
 DefinitionBlock("", "SSDT", 2, "hack", "PS2K", 0)
-{   
+{
     External(\_SB.ATKD.IANE, MethodObj)
     External (\_SB.KBLV, FieldUnitObj)
     External (\_SB.PCI0.LPCB.EC0.WRAM, MethodObj)
-    
-
+    External (\_SB.ATKD, DeviceObj)
+    External (\_SB.ATKD.PWKB, BuffObj)
     External(_SB.PCI0.LPCB.EC0, DeviceObj)
+    External(_SB.PCI0.LPCB.EC0.ATKP, IntObj)
+    External(_SB.PCI0.LPCB.EC0.XQ0E, MethodObj)
+    External(_SB.PCI0.LPCB.EC0.XQ0F, MethodObj)
+
     Scope(_SB.PCI0.LPCB.EC0)
     {
-        External(ATKP, IntObj)
-        External(XQ0E, MethodObj)
-        External(XQ0F, MethodObj)
-    
         Method (_Q0E)
         {
             If (ATKP)
             {
-                \_SB.ATKD.IANE (0x20)
+                \_SB.ATKD.IANE (0x20) // For brightness
             }
-            
-            XQ0E()
+            XQ0E() // Call the previous method
         }
-        
+
         Method (_Q0F)
         {
             If (ATKP)
             {
-                \_SB.ATKD.IANE (0x10)
+                \_SB.ATKD.IANE (0x10) // For brightness
             }
-            
-            XQ0F()
+            XQ0F() // Call the previous method
         }
     }
 
-    External (\_SB.ATKD, DeviceObj)
-    Scope (_SB.ATKD)
+    Scope (_SB.ATKD) // To change keyboard backlight this needs to be injected
     {
-        External(PWKB, BuffObj)
-
         Name (BOFF, Zero)
         Method (SKBL, 1, NotSerialized)
         {
@@ -76,7 +72,6 @@ DefinitionBlock("", "SSDT", 2, "hack", "PS2K", 0)
                     Store (Arg0, KBLV)
                 }
             }
-
             Store (DerefOf (Index (PWKB, Local0)), Local1)
             ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local1)
             Return (Local0)

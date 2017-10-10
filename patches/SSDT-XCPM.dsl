@@ -1,4 +1,5 @@
 // Inject plugin-type=1 on _PR.CPU0 for power management
+// Generic fix for Haswell and later
 
 DefinitionBlock("", "SSDT", 2, "hack", "XCPM", 0)
 {

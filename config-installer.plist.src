@@ -109,146 +109,6 @@
 					RUgwMg==
 					</data>
 				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>_OFF -&gt; XOFF</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X09GRg==
-					</data>
-					<key>Replace</key>
-					<data>
-					WE9GRg==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>_REG -&gt; XREG</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X1JFRw==
-					</data>
-					<key>Replace</key>
-					<data>
-					WFJFRw==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>_Q0E -&gt; XQ0E</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X1EwRQCgDg==
-					</data>
-					<key>Replace</key>
-					<data>
-					WFEwRQCgDg==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>_Q0F -&gt; XQ0F</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X1EwRgCgDg==
-					</data>
-					<key>Replace</key>
-					<data>
-					WFEwRgCgDg==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>SMBR -&gt; XMBR</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					U01CUgtwEg==
-					</data>
-					<key>Replace</key>
-					<data>
-					WE1CUgtwEg==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>SMBW -&gt; XMBW</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					U01CVw1wEg==
-					</data>
-					<key>Replace</key>
-					<data>
-					WE1CVw1wEg==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>ECSB -&gt; XCSB</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					RUNTQgdwEg==
-					</data>
-					<key>Replace</key>
-					<data>
-					WENTQgdwEg==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>TACH -&gt; XACH</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					VEFDSAkIXw==
-					</data>
-					<key>Replace</key>
-					<data>
-					WEFDSAkIXw==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>_BIX -&gt; XBIX</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X0JJWACgGA==
-					</data>
-					<key>Replace</key>
-					<data>
-					WEJJWACgGA==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Fix logic error in FBST</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					oApDSEdTAHAKAmChBHABYA==
-					</data>
-					<key>Replace</key>
-					<data>
-					oApDSEdTAHAKAmChBHAAYA==
-					</data>
-				</dict>
 			</array>
 			<key>ReuseFFFF</key>
 			<false/>
@@ -280,13 +140,6 @@
 		<array>
 			<string>SSDT-XOSI.aml</string>
 			<string>SSDT-XCPM.aml</string>
-			<string>SSDT-LPC.aml</string>
-			<string>SSDT-DGPU.aml</string>
-			<string>SSDT-IGPU.aml</string>
-			<string>SSDT-HDEF.aml</string>
-			<string>SSDT-HDAU.aml</string>
-			<string>SSDT-BATT.aml</string>
-			<string>SSDT-PS2K.aml</string>
 		</array>
 	</dict>
 	<key>Boot</key>
@@ -315,6 +168,11 @@
 	</dict>
 	<key>Devices</key>
 	<dict>
+		<key>FakeID</key>
+		<dict>
+			<key>IntelGFX</key>
+			<string>0x041268086</string>
+		</dict>
 		<key>USB</key>
 		<dict>
 			<key>AddClockID</key>
@@ -366,14 +224,14 @@
 			<key>ATI</key>
 			<false/>
 			<key>Intel</key>
-			<false/>
+			<true/>
 			<key>NVidia</key>
 			<false/>
 		</dict>
 		<key>NvidiaSingle</key>
 		<false/>
 		<key>ig-platform-id</key>
-		<string>0x04260000</string>
+		<string>0x0a260006</string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
@@ -397,22 +255,6 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Enable TRIM for SSD</string>
-				<key>Disabled</key>
-				<false/>
-				<key>Find</key>
-				<data>
-				AEFQUExFIFNTRAA=
-				</data>
-				<key>Name</key>
-				<string>com.apple.iokit.IOAHCIBlockStorage</string>
-				<key>Replace</key>
-				<data>
-				AAAAAAAAAAAAAAA=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>10.12-BCM94352-5GHz-US-FCC-dv</string>
 				<key>Disabled</key>
 				<false/>
@@ -431,7 +273,7 @@
 				<key>Comment</key>
 				<string>Enable 9MB cursor bytes, 0x0a260006</string>
 				<key>Disabled</key>
-				<true/>
+				<false/>
 				<key>Find</key>
 				<data>
 				BgAmCgEDAwMAAAACAAAwAQAAYAA=
@@ -447,7 +289,7 @@
 				<key>Comment</key>
 				<string>Fix boot graphics glitch</string>
 				<key>Disabled</key>
-				<true/>
+				<false/>
 				<key>Find</key>
 				<data>
 				AQAAdSU=
@@ -483,8 +325,11 @@
 		<string>0x28</string>
 		<key>CsrActiveConfig</key>
 		<string>0x3FF</string>
+		<key>MLB</key>
+		<string></string>
 		<key>ROM</key>
-		<string>UseMacAddr0</string>
+		<data>
+		</data>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
@@ -518,12 +363,18 @@
 		<string>Part Component</string>
 		<key>Manufacturer</key>
 		<string>Apple Inc.</string>
+		<key>BoardSerialNumber</key>
+		<string></string>
 		<key>Mobile</key>
 		<true/>
 		<key>PlatformFeature</key>
 		<string>0x02</string>
 		<key>ProductName</key>
 		<string>MacBookPro11,1</string>
+		<key>SerialNumber</key>
+		<string></string>
+		<key>SmUUID</key>
+		<string></string>
 		<key>Trust</key>
 		<true/>
 		<key>Version</key>
@@ -531,6 +382,8 @@
 	</dict>
 	<key>SystemParameters</key>
 	<dict>
+		<key>CustomUUID</key>
+		<string></string>
 		<key>InjectKexts</key>
 		<string>Detect</string>
 		<key>InjectSystemID</key>
