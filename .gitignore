@@ -26,9 +26,13 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Downloaded kexts
+# Downloaded kexts and tools
 kexts/*
+tools/*
 
 # Serials for custom patcher
 serials.sh
 *.plist
+
+# Compiled DSDT patches
+amls/*

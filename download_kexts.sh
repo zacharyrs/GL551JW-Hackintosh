@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 function download_bb()
 {
     echo "Downloading $2:"

@@ -31,8 +31,9 @@ DefinitionBlock("", "SSDT", 2, "hack", "IGPU", 0)
             Name(_ADR, Zero)
             Name(_HID, EisaId ("APP0002"))
             Name(_CID, "backlight")
-            Name(_UID, \ZRSC.LUID)
+            Alias(\ZRSC.LUID, _UID)
             Name(_STA, 0x0B)
+
 
             Field(^IGD5, AnyAcc, NoLock, Preserve)
             {
