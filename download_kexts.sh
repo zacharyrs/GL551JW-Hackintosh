@@ -63,4 +63,6 @@ rm -rf tmp
 
 cd LE
 cp -R FakeSMC* FakePCIID* RealtekRTL8111* ../CL/
+mkdir -p 'AppleBacklightInjector.kext/Contents'
+curl --output 'AppleBacklightInjector.kext/Contents/Info.plist' --progress-bar --location https://raw.githubusercontent.com/RehabMan/HP-ProBook-4x30s-DSDT-Patch/master/kexts/AppleBacklightInjector.kext/Contents/Info.plist
 cd ../../
