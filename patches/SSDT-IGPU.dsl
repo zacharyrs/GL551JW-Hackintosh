@@ -13,13 +13,19 @@ DefinitionBlock("", "SSDT", 2, "hack", "IGPU", 0)
         Method(_DSM, 4)
         {
             If (!Arg2) { Return (Buffer() { 0x03 } ) }
-            Return(Package()
+            Local0 = Package()
             {
                 "device-id", Buffer() { 0x12, 0x04, 0x00, 0x00 },
-                "AAPL,ig-platform-id", \ZRSC.IGPU, // Gets from config
+                "AAPL,ig-platform-id", Buffer() { 0x00, 0x00, 0x26, 0x04 },
                 "hda-gfx", Buffer() { "onboard-1" },
 //                "model", Buffer() { "Intel HD 4600" }, // Fix About This Mac
-            })
+            }
+            If (CondRefOf(\ZRSC.IGPU)) // Gets from config
+            {
+                CreateDWordField(DerefOf(Local0[3]), 0, IGPU)
+                IGPU = \ZRSC.IGPU
+            }
+            Return (Local0)
         }
 
         // need the device-id from PCI_config to inject correct properties
@@ -59,14 +65,13 @@ DefinitionBlock("", "SSDT", 2, "hack", "IGPU", 0)
             Method(_INI)
             {
                 Local0 = GDID
-                Local2 = \ZRSC.LMAX
 
                 LEVW = 0xC0000000
                 Local1 = LEVX >> 16
-                If (!Local1) { Local1 = Local2 }
-                If (Local2 != Local1)
+                If (!Local1) { Local1 = \ZRSC.LMAX }
+                If (\ZRSC.LMAX != Local1)
                 {
-                    Local0 = (((LEVX & 0xFFFF) * Local2) / Local1) | (Local2 << 16)
+                    Local0 = (((LEVX & 0xFFFF) * \ZRSC.LMAX) / Local1) | (\ZRSC.LMAX << 16)
                     LEVX = Local0
                 }
             }
