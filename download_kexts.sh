@@ -6,7 +6,7 @@ function download_bb()
     curl --location --silent --output /tmp/download.txt https://bitbucket.org/RehabMan/$1/downloads/
     scrape=`grep -o -m 1 "/RehabMan/$1/downloads/$2.*\.zip" /tmp/download.txt|perl -ne 'print $1 if /(.*)\"/'`
     url=https://bitbucket.org$scrape
-    curl --remote-name --progress-bar --location "$url"
+    curl --output "$2.zip" --progress-bar --location "$url"
 }
 
 function download_gh()
@@ -15,7 +15,7 @@ function download_gh()
     curl --location --silent --output /tmp/download.txt https://api.github.com/repos/$1/$2/releases/latest
     scrape=`grep -o -m 1 '"name": *"[^"]*' /tmp/download.txt | grep -o '[^"]*$'`
     url=https://github.com/$1/$2/releases/download/$scrape/$scrape.RELEASE.zip
-    curl --remote-name --progress-bar --location "$url"
+    curl --output "$2.zip" --progress-bar --location "$url"
 }
 
 if [ ! -d ./kexts ]; then mkdir ./kexts; fi && rm -Rf kexts/* && cd ./kexts
