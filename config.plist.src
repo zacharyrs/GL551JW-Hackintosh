@@ -474,6 +474,22 @@
 				RiV1VHh4eHgA
 				</data>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>VRAM increase - zacharyrs</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				AAAmBAADAwMAAAAEAAAAAQAA8AAAAABA
+				</data>
+				<key>Name</key>
+				<string>AppleIntelFramebufferAzul</string>
+				<key>Replace</key>
+				<data>
+				AAAmBAADAwMAAAAEAAAAAQAA8AAAAACA
+				</data>
+			</dict>
 		</array>
 	</dict>
 	<key>RtVariables</key>
