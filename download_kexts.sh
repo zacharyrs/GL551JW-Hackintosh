@@ -15,6 +15,7 @@ function download_gh()
     curl --location --silent --output /tmp/download.txt https://api.github.com/repos/$1/$2/releases/latest
     scrape=`grep -o -m 1 '"name": *"[^"]*' /tmp/download.txt | grep -o '[^"]*$'`
     url=https://github.com/$1/$2/releases/download/$scrape/$scrape.RELEASE.zip
+    # TODO: Add a fix for new name of AppleALC release. Curl URL and if not found assume new format?
     curl --output "$2.zip" --progress-bar --location "$url"
 }
 
