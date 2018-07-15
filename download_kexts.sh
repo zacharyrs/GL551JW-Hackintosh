@@ -15,6 +15,10 @@ function download_gh()
     curl --location --silent --output /tmp/download.txt https://api.github.com/repos/$1/$2/releases/latest
     scrape=`grep -o -m 1 '"name": *"[^"]*' /tmp/download.txt | grep -o '[^"]*$'`
     url=https://github.com/$1/$2/releases/download/$scrape/$scrape.RELEASE.zip
+    if [[ $# -eq 3 ]]; then
+      url=https://github.com/$1/$2/releases/download/$scrape/${scrape//$3}.RELEASE.zip
+    fi
+    echo $url
     # TODO: Add a fix for new name of AppleALC release. Curl URL and if not found assume new format?
     curl --output "$2.zip" --progress-bar --location "$url"
 }
@@ -46,8 +50,8 @@ cd ..
 
 
 if [ ! -d ./vi ]; then mkdir ./vi; fi && rm -Rf vi/* && cd ./vi
-download_gh vit9696 Lilu
-download_gh vit9696 AppleALC
+download_gh acidanthera Lilu
+download_gh acidanthera AppleALC
 unzip '*.zip'
 rm -rf *.dSYM
 mv *.kext ../../LE/
@@ -55,10 +59,13 @@ cd ..
 
 
 if [ ! -d ./lv ]; then mkdir ./lv; fi && rm -Rf lv/* && cd ./lv
-curl --output '1.zip' --progress-bar --location https://sourceforge.net/projects/intelgraphicsfixup/files/latest/download
+download_gh lvs1974 IntelGraphicsFixup v
 unzip '*.zip'
+rm -rf '*.dSYM'
 mv *.kext ../../LE/
 cd ../..
+
+
 rm -rf tmp
 
 
