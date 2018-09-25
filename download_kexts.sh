@@ -15,11 +15,6 @@ function download_gh()
     curl --location --silent --output /tmp/download.txt https://api.github.com/repos/$1/$2/releases/latest
     scrape=`grep -o -m 1 '"name": *"[^"]*' /tmp/download.txt | grep -o '[^"]*$'`
     url=https://github.com/$1/$2/releases/download/$scrape/$scrape.RELEASE.zip
-    if [[ $# -eq 3 ]]; then
-      url=https://github.com/$1/$2/releases/download/$scrape/${scrape//$3}.RELEASE.zip
-    fi
-    echo $url
-    # TODO: Add a fix for new name of AppleALC release. Curl URL and if not found assume new format?
     curl --output "$2.zip" --progress-bar --location "$url"
 }
 
@@ -36,13 +31,13 @@ download_bb os-x-acpi-battery-driver RehabMan-Battery
 download_bb os-x-eapd-codec-commander RehabMan-CodecCommander
 download_bb os-x-fake-pci-id RehabMan-FakePCIID
 download_bb os-x-brcmpatchram RehabMan-BrcmPatchRAM
-unzip '*.zip'
+unzip -qq '*.zip'
 rm -rf Debug
 rm -rf *Sensors.kext
 rm -rf *.app
 rm -rf FakePCIID_AR9280_as_AR946x.kext FakePCIID_BCM57XX_as_BCM57765.kext FakePCIID_Intel_GbX.kext
 rm -rf BrcmFirmwareData.kext BrcmNonPatchRAM.kext BrcmPatchRAM.kext
-rm -rf Release/FakePCIID_AR9280_as_AR946x.kext Release/FakePCIID_BCM57XX_as_BCM57765.kext Release/FakePCIID_Intel_GbX.kext
+rm -rf Release/FakePCIID_AR9280_as_AR946x.kext Release/FakePCIID_BCM57XX_as_BCM57765.kext Release/FakePCIID_Intel_GbX.kext Release/FakePCIID_Intel_HD_Graphics.kext
 rm -rf Release/BrcmFirmwareData.kext Release/BrcmNonPatchRAM.kext Release/BrcmNonPatchRAM2.kext Release/BrcmPatchRAM.kext
 mv *.kext ../../LE/
 mv Release/*.kext ../../LE/
@@ -52,25 +47,20 @@ cd ..
 if [ ! -d ./vi ]; then mkdir ./vi; fi && rm -Rf vi/* && cd ./vi
 download_gh acidanthera Lilu
 download_gh acidanthera AppleALC
-unzip '*.zip'
+download_gh acidanthera WhateverGreen
+unzip -qq '*.zip'
 rm -rf *.dSYM
 mv *.kext ../../LE/
 cd ..
 
-
-if [ ! -d ./lv ]; then mkdir ./lv; fi && rm -Rf lv/* && cd ./lv
-download_gh lvs1974 IntelGraphicsFixup v
-unzip '*.zip'
-rm -rf '*.dSYM'
-mv *.kext ../../LE/
-cd ../..
-
-
 rm -rf tmp
+
+cd ..
 
 
 cd LE
 cp -R FakeSMC* FakePCIID* RealtekRTL8111* ../CL/
+echo "Downloading AppleBacklightInjector:"
 mkdir -p 'AppleBacklightInjector.kext/Contents'
 curl --output 'AppleBacklightInjector.kext/Contents/Info.plist' --progress-bar --location https://raw.githubusercontent.com/RehabMan/HP-ProBook-4x30s-DSDT-Patch/master/kexts/AppleBacklightInjector.kext/Contents/Info.plist
 cd ../../
