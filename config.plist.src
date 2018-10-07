@@ -414,7 +414,7 @@
 				<key>Comment</key>
 				<string>Enable TRIM for SSD</string>
 				<key>Disabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>
 				AEFQUExFIFNTRAA=
@@ -432,7 +432,7 @@
 				<key>Comment</key>
 				<string>10.12-BCM94352-5GHz-US-FCC-dv</string>
 				<key>Disabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>
 				gflSqgAAdSk=

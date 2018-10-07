@@ -20,7 +20,7 @@ if [ ! -f tools/iasl ]; then
     cd ..
 fi
 
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p amls/SSDT-BATT.aml patches/SSDT-BATT.dsl
+# ./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p amls/SSDT-BATT.aml patches/SSDT-BATT.dsl
 ./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p amls/SSDT-DGPU.aml patches/SSDT-DGPU.dsl
 ./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p amls/SSDT-HDAU.aml patches/SSDT-HDAU.dsl
 ./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p amls/SSDT-HDEF.aml patches/SSDT-HDEF.dsl
