@@ -7,13 +7,11 @@ for f in config*.plist.src; do
 done
 
 for f in config*.plist; do
-  /usr/libexec/PlistBuddy -c "Delete :SystemParameters:CustomUUID" $f
   /usr/libexec/PlistBuddy -c "Delete :SMBIOS:SmUUID" $f
   /usr/libexec/PlistBuddy -c "Delete :SMBIOS:SerialNumber" $f
   /usr/libexec/PlistBuddy -c "Delete :SMBIOS:BoardSerialNumber" $f
   /usr/libexec/PlistBuddy -c "Delete :RtVariables:MLB" $f
   /usr/libexec/PlistBuddy -c "Delete :RtVariables:ROM" $f
-  /usr/libexec/PlistBuddy -c "Add :SystemParameters:CustomUUID string $UUID" $f
   /usr/libexec/PlistBuddy -c "Add :SMBIOS:SmUUID string $UUID" $f
   /usr/libexec/PlistBuddy -c "Add :SMBIOS:SerialNumber string $SN" $f
   /usr/libexec/PlistBuddy -c "Add :SMBIOS:BoardSerialNumber string $MLB" $f
