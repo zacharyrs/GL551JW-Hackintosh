@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+export UUID='PUT UUID HERE (MAKE WITH uuid-gen)'
+export MLB='PUT BOARD SERIAL HERE (GOOGLE HOW TO MAKE IT)'
+export SN='PUT SERIAL NUMBER HERE (GOOGLE AS ABOVE)'
+export ROM=`echo 'PUT ROM HERE, CAN BE MAC ADDRESS IF YOU DONT KNOW' | xxd -r -p`
