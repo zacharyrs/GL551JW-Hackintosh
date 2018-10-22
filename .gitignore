@@ -27,7 +27,7 @@ Temporary Items
 .apdisk
 
 # Downloaded kexts and tools
-kexts/*
+output/*
 tools/*
 
 # Serials for custom patcher

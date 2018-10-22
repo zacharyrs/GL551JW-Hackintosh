@@ -21,17 +21,24 @@ function download_gh()
     curl --output "$2.zip" --progress-bar --location "$url"
 }
 
-if [ ! -d ./kexts ]; then mkdir ./kexts; fi && rm -Rf kexts/* && cd ./kexts
+if [ ! -d ./output ]; then mkdir ./output; fi && cd ./output/
 
-if [ ! -d ./LE ]; then mkdir ./LE; fi && rm -Rf LE/*
-if [ ! -d ./CL ]; then mkdir ./CL; fi && rm -Rf CL/*
+if [ ! -d ./local ]; then mkdir ./local; fi && cd ./local/
+if [ ! -d ./kexts ]; then mkdir ./kexts; fi && rm -Rf kexts/*
+cd ../
 
-if [ ! -d ./tmp ]; then mkdir ./tmp; fi && rm -Rf tmp/* && cd ./tmp
-if [ ! -d ./rm ]; then mkdir ./rm; fi && rm -Rf rm/* && cd ./rm
+if [ ! -d ./efi ]; then mkdir ./efi; fi && cd ./efi/
+if [ ! -d ./kexts ]; then mkdir ./kexts; fi && rm -Rf kexts/*
+if [ ! -d ./drivers ]; then mkdir ./drivers; fi && rm -Rf drivers/*
+cd ../
+
+if [ ! -d ./tmp ]; then mkdir ./tmp; fi && rm -Rf tmp/* && cd ./tmp/
+if [ ! -d ./rm ]; then mkdir ./rm; fi && rm -Rf rm/* && cd ./rm/
 download_bb os-x-realtek-network RehabMan-Realtek-Network
 download_bb os-x-eapd-codec-commander RehabMan-CodecCommander
 download_bb os-x-fake-pci-id RehabMan-FakePCIID
 download_bb os-x-brcmpatchram RehabMan-BrcmPatchRAM
+download_bb AppleBacklightFixup RehabMan-AppleBacklightFixup
 unzip -qqo '*.zip'
 rm -rf Debug
 rm -rf *Sensors.kext
@@ -40,11 +47,11 @@ rm -rf FakePCIID_AR9280_as_AR946x.kext FakePCIID_BCM57XX_as_BCM57765.kext FakePC
 rm -rf BrcmFirmwareData.kext BrcmNonPatchRAM.kext BrcmPatchRAM.kext
 rm -rf Release/FakePCIID_AR9280_as_AR946x.kext Release/FakePCIID_BCM57XX_as_BCM57765.kext Release/FakePCIID_Intel_GbX.kext Release/FakePCIID_Intel_HD_Graphics.kext Release/FakePCIID_Intel_HDMI_Audio.kext
 rm -rf Release/BrcmFirmwareData.kext Release/BrcmNonPatchRAM.kext Release/BrcmNonPatchRAM2.kext Release/BrcmPatchRAM.kext
-mv Release/*.kext ../../LE/
-cd ..
+mv Release/*.kext ../../local/kexts/
+cd ../
 
 
-if [ ! -d ./ac ]; then mkdir ./ac; fi && rm -Rf ac/* && cd ./ac
+if [ ! -d ./ac ]; then mkdir ./ac; fi && rm -Rf ac/* && cd ./ac/
 download_gh acidanthera Lilu
 download_gh acidanthera AppleALC
 download_gh acidanthera WhateverGreen
@@ -52,18 +59,15 @@ download_gh acidanthera VirtualSMC
 download_gh acidanthera AirportBrcmFixup v
 unzip -qqo '*.zip'
 rm -rf *.dSYM
-mv *.kext ../../LE/
-mv Drivers/VirtualSmc.efi ../../CL/
-mv Kexts/SMCBatteryManager.kext Kexts/VirtualSMC.kext ../../LE/
+mv *.kext ../../local/kexts/
+mv Drivers/VirtualSmc.efi ../../efi/drivers/
+mv Kexts/SMCBatteryManager.kext Kexts/VirtualSMC.kext ../../local/kexts/
 cd ../../
 
 
 rm -rf tmp
 
 
-cd LE
-cp -R VirtualSMC* FakePCIID* RealtekRTL8111* Lilu* WhateverGreen* AirportBrcmFixup* ../CL/
-echo "Downloading AppleBacklightInjector:"
-mkdir -p 'AppleBacklightInjector.kext/Contents'
-curl --output 'AppleBacklightInjector.kext/Contents/Info.plist' --progress-bar --location https://raw.githubusercontent.com/RehabMan/HP-ProBook-4x30s-DSDT-Patch/master/kexts/AppleBacklightInjector.kext/Contents/Info.plist
+cd ./local/kexts/
+cp -R VirtualSMC* FakePCIID* RealtekRTL8111* Lilu* WhateverGreen* AirportBrcmFixup* ../../efi/kexts/
 cd ../../

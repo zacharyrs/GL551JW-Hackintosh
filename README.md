@@ -1,1 +1,2 @@
-# WORK IN PROGRESS
+# my basic hackintosh configuration
+## relies on hotpatching
