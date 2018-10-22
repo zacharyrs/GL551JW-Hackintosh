@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
+echo "Patching configs w/ serials"
+
 source serials.sh
 
 if [ ! -d ./output ]; then mkdir ./output; fi && cd ./output
 if [ ! -d ./efi ]; then mkdir ./efi; fi
 cd ../
 
-for f in ./configs/config*.plist.src; do
-  cp ./configs/$f ./output/efi/${f%.*}
+cd ./configs/
+for f in config*.plist.src; do
+  cp $f ../output/efi/${f%.*}
 done
 
-cd ./output/efi/
+cd ../output/efi/
 
 for f in config*.plist; do
   /usr/libexec/PlistBuddy -c "Delete :SMBIOS:SmUUID" $f
@@ -26,3 +29,6 @@ for f in config*.plist; do
 done
 
 cd ../../
+
+echo ""
+echo ""

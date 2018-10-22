@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function download_bb()
+function download_rm()
 {
     echo "Downloading $2:"
     curl --location --silent --output /tmp/download.txt https://bitbucket.org/RehabMan/$1/downloads/
@@ -9,28 +9,42 @@ function download_bb()
     curl --remote-name --progress-bar --location "$url"
 }
 
+function compile_patch()
+{
+    echo "... $1:"
+    ./tools/iasl -p output/efi/amls/$1.aml patches/$1.dsl >> output/efi/amls/log.txt
+}
+
 if [ ! -d ./tools ]; then mkdir ./tools; fi
 
 if [ ! -d ./output ]; then mkdir ./output; fi && cd ./output/
 if [ ! -d ./efi ]; then mkdir ./efi; fi && cd ./efi/
-if [ ! -d ./patches ]; then mkdir ./patches; fi && rm -Rf ./patches/*
+if [ ! -d ./amls ]; then mkdir ./amls; fi && rm -Rf ./amls/*
 cd ../../
 
 if [ ! -f tools/iasl ]; then
+    echo "iasl not downloaded, getting now!"
     cd tools
-    download_bb acpica iasl
+    download_rm acpica iasl
     unzip 'iasl.zip'
     rm 'iasl.zip'
     cd ..
 fi
 
-# ./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-BATT.aml patches/SSDT-BATT.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-DGPU.aml patches/SSDT-DGPU.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-HDAU.aml patches/SSDT-HDAU.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-HDEF.aml patches/SSDT-HDEF.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-IGPU.aml patches/SSDT-IGPU.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-XLPC.aml patches/SSDT-XLPC.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-PS2K.aml patches/SSDT-PS2K.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-XCPM.aml patches/SSDT-XCPM.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-XOSI.aml patches/SSDT-XOSI.dsl
-./tools/iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p output/efi/patches/SSDT-ZRSC.aml patches/SSDT-ZRSC.dsl
+
+
+echo "Compiling patches"
+
+# compile_patch SSDT-BATT
+compile_patch SSDT-DGPU
+compile_patch SSDT-HDAU
+compile_patch SSDT-HDEF
+compile_patch SSDT-IGPU
+compile_patch SSDT-XLPC
+compile_patch SSDT-PS2K
+compile_patch SSDT-XCPM
+compile_patch SSDT-XOSI
+compile_patch SSDT-ZRSC
+
+echo ""
+echo ""

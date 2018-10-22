@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-function download_bb()
+function download_rm()
 {
-    echo "Downloading $2:"
+    echo "... $2:"
     curl --location --silent --output /tmp/download.txt https://bitbucket.org/RehabMan/$1/downloads/
-    scrape=`grep -o -m 1 "/RehabMan/$1/downloads/$2.*\.zip" /tmp/download.txt|perl -ne 'print $1 if /(.*)\"/'`
+    scrape=`grep -o -i -m 1 "/RehabMan/$1/downloads/$2.*\.zip" /tmp/download.txt | perl -ne 'print $1 if /(.*)\"/'`
     url=https://bitbucket.org$scrape
     curl --output "$2.zip" --progress-bar --location "$url"
 }
 
 function download_gh()
 {
-    echo "Downloading $2:"
+    echo "... $2:"
     curl --location --silent --output /tmp/download.txt https://api.github.com/repos/$1/$2/releases/latest
     scrape=`grep -o -m 1 '"name": *"[^"]*' /tmp/download.txt | grep -o '[^"]*$'`
     url=https://github.com/$1/$2/releases/download/$scrape/$scrape.RELEASE.zip
@@ -20,6 +20,8 @@ function download_gh()
     fi
     curl --output "$2.zip" --progress-bar --location "$url"
 }
+
+echo "Downloading kexts (and drivers)"
 
 if [ ! -d ./output ]; then mkdir ./output; fi && cd ./output/
 
@@ -34,11 +36,11 @@ cd ../
 
 if [ ! -d ./tmp ]; then mkdir ./tmp; fi && rm -Rf tmp/* && cd ./tmp/
 if [ ! -d ./rm ]; then mkdir ./rm; fi && rm -Rf rm/* && cd ./rm/
-download_bb os-x-realtek-network RehabMan-Realtek-Network
-download_bb os-x-eapd-codec-commander RehabMan-CodecCommander
-download_bb os-x-fake-pci-id RehabMan-FakePCIID
-download_bb os-x-brcmpatchram RehabMan-BrcmPatchRAM
-download_bb AppleBacklightFixup RehabMan-AppleBacklightFixup
+download_rm os-x-realtek-network RehabMan-Realtek-Network
+download_rm os-x-eapd-codec-commander RehabMan-CodecCommander
+download_rm os-x-fake-pci-id RehabMan-FakePCIID
+download_rm os-x-brcmpatchram RehabMan-BrcmPatchRAM
+download_rm AppleBacklightFixup RehabMan-BacklightFixup
 unzip -qqo '*.zip'
 rm -rf Debug
 rm -rf *Sensors.kext
@@ -71,3 +73,6 @@ rm -rf tmp
 cd ./local/kexts/
 cp -R VirtualSMC* FakePCIID* RealtekRTL8111* Lilu* WhateverGreen* AirportBrcmFixup* ../../efi/kexts/
 cd ../../
+
+echo ""
+echo ""
