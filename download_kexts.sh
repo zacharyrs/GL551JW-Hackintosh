@@ -13,11 +13,9 @@ function download_gh()
 {
     echo "... $2:"
     curl --location --silent --output /tmp/download.txt https://api.github.com/repos/$1/$2/releases/latest
-    scrape=`grep -o -m 1 '"name": *"[^"]*' /tmp/download.txt | grep -o '[^"]*$'`
-    url=https://github.com/$1/$2/releases/download/$scrape/$scrape.RELEASE.zip
-    if [[ $# -eq 3 ]]; then
-      url=https://github.com/$1/$2/releases/download/$scrape/${scrape//$3}.RELEASE.zip
-    fi
+    tag=`grep '"tag_name":' /tmp/download.txt | sed -E 's/.*"([^"]+)".*/\1/'`
+    rls=`grep '"name":' /tmp/download.txt | grep RELEASE | sed -E 's/.*"([^"]+)".*/\1/'`
+    url=https://github.com/$1/$2/releases/download/$tag/$rls
     curl --output "$2.zip" --progress-bar --location "$url"
 }
 
@@ -58,11 +56,14 @@ download_gh acidanthera Lilu
 download_gh acidanthera AppleALC
 download_gh acidanthera WhateverGreen
 download_gh acidanthera VirtualSMC
-download_gh acidanthera AirportBrcmFixup v
+download_gh acidanthera AirportBrcmFixup
+download_gh acidanthera AptioFixPkg
+download_gh acidanthera AppleSupportPkg
 unzip -qqo '*.zip'
 rm -rf *.dSYM
 mv *.kext ../../local/kexts/
-mv Drivers/VirtualSmc.efi ../../efi/drivers/
+rm Drivers/UsbKbDxe.efi
+mv Drivers/*.efi ../../efi/drivers/
 mv Kexts/SMCBatteryManager.kext Kexts/VirtualSMC.kext ../../local/kexts/
 cd ../../
 
