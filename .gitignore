@@ -32,7 +32,6 @@ tools/*
 
 # Serials for custom patcher
 serials.sh
-*.plist
 
 # Compiled DSDT patches
 amls/*

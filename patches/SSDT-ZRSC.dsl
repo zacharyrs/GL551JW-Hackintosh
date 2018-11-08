@@ -1,10 +1,8 @@
 // Configuration file for ease of use
 // Rather than needing to change and recompile everything, just do this file
 
-DefinitionBlock ("", "SSDT", 2, "hack", "ZRSC", 0)
-{
-    Device(ZRSC)
-    {
+DefinitionBlock ("", "SSDT", 2, "hack", "ZRSC", 0) {
+    Device(ZRSC) {
         Name(_ADR, 0) // Don't remove me
 
         // IGPU: ig-platform-id
@@ -24,4 +22,3 @@ DefinitionBlock ("", "SSDT", 2, "hack", "ZRSC", 0)
         Name(AUDL, 3)
     }
 }
-//EOF

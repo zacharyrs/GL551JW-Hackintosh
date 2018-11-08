@@ -9,8 +9,8 @@ if [ ! -d ./efi ]; then mkdir ./efi; fi
 cd ../
 
 cd ./configs/
-for f in config*.plist.src; do
-  cp $f ../output/efi/${f%.*}
+for f in config*.plist; do
+  cp $f ../output/efi/${f}
 done
 
 cd ../output/efi/

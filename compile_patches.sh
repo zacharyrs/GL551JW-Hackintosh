@@ -11,7 +11,7 @@ function download_rm()
 
 function compile_patch()
 {
-    echo "... $1:"
+    echo "... $1"
     ./tools/iasl -p output/efi/amls/$1.aml patches/$1.dsl >> output/efi/amls/log.txt
 }
 
@@ -30,7 +30,6 @@ if [ ! -f tools/iasl ]; then
     rm 'iasl.zip'
     cd ..
 fi
-
 
 
 echo "Compiling patches"

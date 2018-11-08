@@ -25,7 +25,9 @@ if [ ! -d ./output ]; then mkdir ./output; fi && cd ./output/
 
 if [ ! -d ./local ]; then mkdir ./local; fi && cd ./local/
 if [ ! -d ./kexts ]; then mkdir ./kexts; fi && rm -Rf kexts/*
-cd ../
+if [ ! -d ./installme ]; then mkdir ./installme; fi && cd ./installme/
+if [ ! -d ./asussmc ]; then mkdir ./asussmc; fi && rm -Rf asussmc/*
+cd ../../
 
 if [ ! -d ./efi ]; then mkdir ./efi; fi && cd ./efi/
 if [ ! -d ./kexts ]; then mkdir ./kexts; fi && rm -Rf kexts/*
@@ -65,6 +67,16 @@ mv *.kext ../../local/kexts/
 rm Drivers/UsbKbDxe.efi
 mv Drivers/*.efi ../../efi/drivers/
 mv Kexts/SMCBatteryManager.kext Kexts/VirtualSMC.kext ../../local/kexts/
+cd ../
+
+
+if [ ! -d ./hp ]; then mkdir ./hp; fi && rm -Rf hp/* && cd ./hp/
+download_gh hieplpvip AsusSMC
+unzip -qqo '*.zip'
+rm -rf *.dSYM
+rm -rf *.zip
+mv *.kext ../../local/kexts/
+mv * ../../local/installme/asussmc/
 cd ../../
 
 
@@ -72,7 +84,7 @@ rm -rf tmp
 
 
 cd ./local/kexts/
-cp -R VirtualSMC* FakePCIID* RealtekRTL8111* Lilu* WhateverGreen* AirportBrcmFixup* ../../efi/kexts/
+cp -R VirtualSMC* FakePCIID* RealtekRTL8111* Lilu* WhateverGreen* AirportBrcmFixup* AsusSMC* SMCBatteryManager* ../../efi/kexts/
 cd ../../
 
 echo ""

@@ -1,12 +1,9 @@
 // Override for host defined _OSI to handle "Darwin"
 // Generic fix regardless of hardware
 
-DefinitionBlock("", "SSDT", 2, "hack", "XOSI", 0)
-{
-    Method(XOSI, 1)
-    {
-        Local0 = Package()
-        {
+DefinitionBlock("", "SSDT", 2, "hack", "XOSI", 0) {
+    Method(XOSI, 1) {
+        Local0 = Package() {
             "Windows",              // generic Windows query
             "Windows 2001",         // Windows XP
             "Windows 2001 SP2",     // Windows XP SP2
@@ -20,4 +17,3 @@ DefinitionBlock("", "SSDT", 2, "hack", "XOSI", 0)
         Return (Ones != Match(Local0, MEQ, Arg0, MTR, 0, 0))
     }
 }
-//EOF
