@@ -24,23 +24,25 @@ DefinitionBlock("", "SSDT", 2, "hack", "PS2K", 0) {
         }
 
         Name (KBPW, Buffer () {
-            0x00, 0x55, 0xA0, 0xFF
+            0x00, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0xA0, 0xB0, 0xC0, 0xD0, 0xE0, 0xF0, 0xFF
+//            0x00, 0x55, 0xA0, 0xFF
         })
 
         Method (SKBV, 1, NotSerialized) {
             External(PWKB, BuffObj)
-            KBLV = Arg0 / 4
+            KBLV = Arg0 / 16
+//            KBLV = Arg0 / 4
             Local0 = DerefOf (KBPW [KBLV])
             ^^PCI0.LPCB.EC0.WRAM (0x04B1, Local0)
             Return (Arg0)
         }
     }
 
-    External(ATKP, IntObj)
     External(\_SB.ATKD.IANE, MethodObj)
 
     External(_SB.PCI0.LPCB.EC0, DeviceObj)
     Scope(_SB.PCI0.LPCB.EC0) {
+        External(ATKP, IntObj)
         External(XQ0A, MethodObj) // 5F513041 00A00E -> 58513041 00A00E
         External(XQ0B, MethodObj) // 5F513042 00A00E -> 58513042 00A00E
         External(XQ0E, MethodObj) // 5F513045 00A00E -> 58513045 00A00E
@@ -50,7 +52,7 @@ DefinitionBlock("", "SSDT", 2, "hack", "PS2K", 0) {
 
         Method (_Q0A) {
             If (ATKP) { \_SB.ATKD.IANE (0x5E) } // For sleep key (f1)
-            XQ0A() // Call the previous method
+            // XQ0A() // <DON'T> Call the previous method
         }
 
         Method (_Q0B) {
