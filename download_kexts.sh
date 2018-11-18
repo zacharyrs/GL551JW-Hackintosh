@@ -70,22 +70,26 @@ mv Kexts/SMCBatteryManager.kext Kexts/VirtualSMC.kext ../../local/kexts/
 cd ../
 
 
-if [ ! -d ./hp ]; then mkdir ./hp; fi && rm -Rf hp/* && cd ./hp/
-download_gh hieplpvip AsusSMC
-unzip -qqo '*.zip'
-rm -rf *.dSYM
-rm -rf *.zip
-mv *.kext ../../local/kexts/
-mv * ../../local/installme/asussmc/
-cd ../../
+# if [ ! -d ./hp ]; then mkdir ./hp; fi && rm -Rf hp/* && cd ./hp/
+# download_gh hieplpvip AsusSMC
+# unzip -qqo '*.zip'
+# rm -rf *.dSYM
+# rm -rf *.zip
+# mv *.kext ../../local/kexts/
+# mv * ../../local/installme/asussmc/
+# cd ../../
 
+cd ../
 
 rm -rf tmp
 
+cp -R ../smrttchpd/* ./local/kexts/
 
 cd ./local/kexts/
-cp -R VirtualSMC* FakePCIID* RealtekRTL8111* Lilu* WhateverGreen* AirportBrcmFixup* AsusSMC* SMCBatteryManager* ../../efi/kexts/
+cp -R VirtualSMC* FakePCIID* RealtekRTL8111* Lilu* WhateverGreen* AirportBrcmFixup* SMCBatteryManager* ApplePS2* AsusNB*  ../../efi/kexts/
 cd ../../
+
+
 
 echo ""
 echo ""

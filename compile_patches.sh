@@ -40,6 +40,7 @@ compile_patch SSDT-HDAU
 compile_patch SSDT-HDEF
 compile_patch SSDT-IGPU
 compile_patch SSDT-XLPC
+# compile_patch SSDT-PS2K-WIP
 compile_patch SSDT-PS2K
 compile_patch SSDT-XCPM
 compile_patch SSDT-XOSI
