@@ -8,23 +8,23 @@ DefinitionBlock("", "SSDT", 2, "hack", "IGPU", 0) {
     External(_SB.PCI0.IGPU, DeviceObj)
     Scope(_SB.PCI0.IGPU) {
         // inject properties for integrated graphics on IGPU
-        Method(_DSM, 4) {
-            If (!Arg2) { Return (Buffer() { 0x03 } ) }
-            Local0 = Package() {
-                "device-id", Buffer() { 0x12, 0x04, 0x00, 0x00 },
-                "AAPL,ig-platform-id", Buffer() { 0x00, 0x00, 0x26, 0x04 },
-                "hda-gfx", Buffer() { "onboard-1" },
-                // "model", Buffer() { "Intel HD 4600" }, // Fix About This Mac
-            }
-
-            // Gets from config
-            If (CondRefOf(\ZRSC.IGPU)) {
-                CreateDWordField(DerefOf(Local0[3]), 0, IGPU)
-                IGPU = \ZRSC.IGPU
-            }
-
-            Return (Local0)
-        }
+//        Method(_DSM, 4) {
+//            If (!Arg2) { Return (Buffer() { 0x03 } ) }
+//            Local0 = Package() {
+//                "device-id", Buffer() { 0x12, 0x04, 0x00, 0x00 },
+//                "AAPL,ig-platform-id", Buffer() { 0x00, 0x00, 0x26, 0x04 },
+//                "hda-gfx", Buffer() { "onboard-1" },
+//                // "model", Buffer() { "Intel HD 4600" }, // Fix About This Mac
+//            }
+//
+//            // Gets from config
+//            If (CondRefOf(\ZRSC.IGPU)) {
+//                CreateDWordField(DerefOf(Local0[3]), 0, IGPU)
+//                IGPU = \ZRSC.IGPU
+//            }
+//
+//            Return (Local0)
+//        }
 
         // need the device-id from PCI_config to inject correct properties
         OperationRegion(IGD5, PCI_Config, 0, 0x14)

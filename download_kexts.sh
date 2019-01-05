@@ -6,6 +6,7 @@ function download_rm()
     curl --location --silent --output /tmp/download.txt https://bitbucket.org/RehabMan/$1/downloads/
     scrape=`grep -o -i -m 1 "/RehabMan/$1/downloads/$2.*\.zip" /tmp/download.txt | perl -ne 'print $1 if /(.*)\"/'`
     url=https://bitbucket.org$scrape
+    echo $url
     curl --output "$2.zip" --progress-bar --location "$url"
 }
 
@@ -16,6 +17,7 @@ function download_gh()
     tag=`grep '"tag_name":' /tmp/download.txt | sed -E 's/.*"([^"]+)".*/\1/'`
     rls=`grep '"name":' /tmp/download.txt | grep RELEASE | sed -E 's/.*"([^"]+)".*/\1/'`
     url=https://github.com/$1/$2/releases/download/$tag/$rls
+    echo $url
     curl --output "$2.zip" --progress-bar --location "$url"
 }
 
@@ -45,9 +47,7 @@ unzip -qqo '*.zip'
 rm -rf Debug
 rm -rf *Sensors.kext
 rm -rf *.app
-rm -rf FakePCIID_AR9280_as_AR946x.kext FakePCIID_BCM57XX_as_BCM57765.kext FakePCIID_Intel_GbX.kext
-rm -rf BrcmFirmwareData.kext BrcmNonPatchRAM.kext BrcmPatchRAM.kext
-rm -rf Release/FakePCIID_AR9280_as_AR946x.kext Release/FakePCIID_BCM57XX_as_BCM57765.kext Release/FakePCIID_Intel_GbX.kext Release/FakePCIID_Intel_HD_Graphics.kext Release/FakePCIID_Intel_HDMI_Audio.kext
+rm -rf Release/FakePCIID_AR9280_as_AR946x.kext Release/FakePCIID_BCM57XX_as_BCM57765.kext Release/FakePCIID_Intel_GbX.kext Release/FakePCIID_Intel_HD_Graphics.kext
 rm -rf Release/BrcmFirmwareData.kext Release/BrcmNonPatchRAM.kext Release/BrcmNonPatchRAM2.kext Release/BrcmPatchRAM.kext
 mv Release/*.kext ../../local/kexts/
 cd ../
@@ -70,6 +70,7 @@ mv Kexts/SMCBatteryManager.kext Kexts/VirtualSMC.kext ../../local/kexts/
 cd ../
 
 
+# Reverted from AsusSMC - didn't work...
 # if [ ! -d ./hp ]; then mkdir ./hp; fi && rm -Rf hp/* && cd ./hp/
 # download_gh hieplpvip AsusSMC
 # unzip -qqo '*.zip'

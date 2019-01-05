@@ -934,7 +934,7 @@
 					<key>EnableAsusKBacklightAutoOff</key>
 					<false/>
 					<key>EnableAsusKBacklightSupport</key>
-					<true/>
+					<false/>
 					<key>IgnoreAccidentalTouchpadInput</key>
 					<true/>
 					<key>TapEnablesTPadFromAccInput</key>

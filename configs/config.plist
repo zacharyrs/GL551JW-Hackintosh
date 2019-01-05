@@ -107,9 +107,19 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
+					<string>_Q0A -&gt; XQ0A</string>
+					<key>Disabled</key>
+					<true/>
+					<key>Find</key>
+					<data>X1EwQQCgDg==</data>
+					<key>Replace</key>
+					<data>WFEwQQCgDg==</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
 					<string>_Q0B -&gt; XQ0B</string>
 					<key>Disabled</key>
-					<false/>
+					<true/>
 					<key>Find</key>
 					<data>X1EwQgCgDg==</data>
 					<key>Replace</key>
@@ -139,7 +149,7 @@
 					<key>Comment</key>
 					<string>_Q11 -&gt; XQ11</string>
 					<key>Disabled</key>
-					<false/>
+					<true/>
 					<key>Find</key>
 					<data>X1ExMQCgDg==</data>
 					<key>Replace</key>
@@ -149,7 +159,7 @@
 					<key>Comment</key>
 					<string>_Q12 -&gt; XQ12</string>
 					<key>Disabled</key>
-					<false/>
+					<true/>
 					<key>Find</key>
 					<data>X1ExMgCgDg==</data>
 					<key>Replace</key>
@@ -182,15 +192,11 @@
 				<false/>
 			</dict>
 		</dict>
-		<key>SortedOrder</key>
-		<array>
-			<string>SSDT-GL551JW.aml</string>
-		</array>
 	</dict>
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>dart=0 nv_disable=1</string>
+		<string>-v dart=0 nv_disable=1</string>
 		<key>Debug</key>
 		<false/>
 		<key>DefaultVolume</key>
@@ -215,10 +221,38 @@
 	<dict>
 		<key>Properties</key>
 		<dict>
+			<key>PciRoot(0x0)/Pci(0x1b,0x0)</key>
+			<dict>
+				<key>hda-gfx</key>
+				<string>onboard-1</string>
+				<key>layout-id</key>
+				<integer>3</integer>
+			</dict>
 			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
 				<data>AAAmBA==</data>
+				<key>device-id</key>
+				<data>EgQAAA==</data>
+				<key>framebuffer-patch-enable</key>
+				<integer>1</integer>
+				<key>hda-gfx</key>
+				<string>onboard-1</string>
+				<key>framebuffer-con2-enable</key>
+				<integer>1</integer>
+				<key>framebuffer-con2-type</key>
+				<data>AAgAAA==</data>
+				<key>framebuffer-con2-pipe</key>
+				<data>EgAAAA==</data>
+			</dict>
+			<key>PciRoot(0x0)/Pci(0x3,0x0)</key>
+			<dict>
+				<key>no-controller-patch</key>
+				<integer>1</integer>
+				<key>hda-gfx</key>
+				<string>onboard-1</string>
+				<key>layout-id</key>
+				<integer>3</integer>
 			</dict>
 		</dict>
 		<key>USB</key>
@@ -254,9 +288,9 @@
 		<dict>
 			<key>Entries</key>
 			<true/>
+			<key>Kernel</key>
+			<string>MostRecent</string>
 			<key>Legacy</key>
-			<false/>
-			<key>Linux</key>
 			<false/>
 			<key>Tool</key>
 			<true/>

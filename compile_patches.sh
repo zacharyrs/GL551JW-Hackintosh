@@ -34,14 +34,14 @@ fi
 
 echo "Compiling patches"
 
-# compile_patch SSDT-BATT
+# compile_patch SSDT-BATT # no longer needed with SMCBatteryManager
+# compile_patch SSDT-HDAU # done via clover now
+# compile_patch SSDT-PS2K-WIP # reverted from AsusSMC - couldn't make it work...
+compile_patch SSDT-HDEF # done via clover now add properties, but CodecCommander config here
 compile_patch SSDT-DGPU
-compile_patch SSDT-HDAU
-compile_patch SSDT-HDEF
 compile_patch SSDT-IGPU
-compile_patch SSDT-XLPC
-# compile_patch SSDT-PS2K-WIP
 compile_patch SSDT-PS2K
+compile_patch SSDT-XLPC
 compile_patch SSDT-XCPM
 compile_patch SSDT-XOSI
 compile_patch SSDT-ZRSC
