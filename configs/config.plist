@@ -107,26 +107,6 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>_Q0A -&gt; XQ0A</string>
-					<key>Disabled</key>
-					<true/>
-					<key>Find</key>
-					<data>X1EwQQCgDg==</data>
-					<key>Replace</key>
-					<data>WFEwQQCgDg==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>_Q0B -&gt; XQ0B</string>
-					<key>Disabled</key>
-					<true/>
-					<key>Find</key>
-					<data>X1EwQgCgDg==</data>
-					<key>Replace</key>
-					<data>WFEwQgCgDg==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
 					<string>_Q0E -&gt; XQ0E</string>
 					<key>Disabled</key>
 					<false/>
@@ -144,26 +124,6 @@
 					<data>X1EwRgCgDg==</data>
 					<key>Replace</key>
 					<data>WFEwRgCgDg==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>_Q11 -&gt; XQ11</string>
-					<key>Disabled</key>
-					<true/>
-					<key>Find</key>
-					<data>X1ExMQCgDg==</data>
-					<key>Replace</key>
-					<data>WFExMQCgDg==</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>_Q12 -&gt; XQ12</string>
-					<key>Disabled</key>
-					<true/>
-					<key>Find</key>
-					<data>X1ExMgCgDg==</data>
-					<key>Replace</key>
-					<data>WFExMgCgDg==</data>
 				</dict>
 			</array>
 			<key>ReuseFFFF</key>
@@ -339,34 +299,6 @@
 		<false/>
 		<key>KextsToPatch</key>
 		<array>
-			<dict>
-				<key>Comment</key>
-				<string>Enable TRIM for SSD</string>
-				<key>Disabled</key>
-				<true/>
-				<key>Find</key>
-				<data>AEFQUExFIFNTRAA=</data>
-				<key>InfoPlistPatch</key>
-				<false/>
-				<key>Name</key>
-				<string>com.apple.iokit.IOAHCIBlockStorage</string>
-				<key>Replace</key>
-				<data>AAAAAAAAAAAAAAA=</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>10.12-BCM94352-5GHz-US-FCC-dv</string>
-				<key>Disabled</key>
-				<true/>
-				<key>Find</key>
-				<data>gflSqgAAdSk=</data>
-				<key>InfoPlistPatch</key>
-				<false/>
-				<key>Name</key>
-				<string>AirPortBrcm4360</string>
-				<key>Replace</key>
-				<data>gflSqgAAZpA=</data>
-			</dict>
 			<dict>
 				<key>Comment</key>
 				<string>change F%uT%04x to F%uTxxxx in AppleBacklightInjector.kext (credit RehabMan)</string>

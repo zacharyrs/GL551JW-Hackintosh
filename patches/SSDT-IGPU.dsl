@@ -1,40 +1,17 @@
-// Handles IGPU injection + brightness
+// Handles Brightness
 
 DefinitionBlock("", "SSDT", 2, "hack", "IGPU", 0) {
-    External(\ZRSC.IGPU, IntObj)
-    External(\ZRSC.LMAX, IntObj)
-    External(\ZRSC.LUID, IntObj)
-
     External(_SB.PCI0.IGPU, DeviceObj)
     Scope(_SB.PCI0.IGPU) {
-        // inject properties for integrated graphics on IGPU
-//        Method(_DSM, 4) {
-//            If (!Arg2) { Return (Buffer() { 0x03 } ) }
-//            Local0 = Package() {
-//                "device-id", Buffer() { 0x12, 0x04, 0x00, 0x00 },
-//                "AAPL,ig-platform-id", Buffer() { 0x00, 0x00, 0x26, 0x04 },
-//                "hda-gfx", Buffer() { "onboard-1" },
-//                // "model", Buffer() { "Intel HD 4600" }, // Fix About This Mac
-//            }
-//
-//            // Gets from config
-//            If (CondRefOf(\ZRSC.IGPU)) {
-//                CreateDWordField(DerefOf(Local0[3]), 0, IGPU)
-//                IGPU = \ZRSC.IGPU
-//            }
-//
-//            Return (Local0)
-//        }
-
         // need the device-id from PCI_config to inject correct properties
         OperationRegion(IGD5, PCI_Config, 0, 0x14)
 
-        // For backlight control (RehabMan's with unused removed)
+        // For backlight control
         Device(PNLF) {
             Name(_ADR, Zero)
             Name(_HID, EisaId ("APP0002"))
             Name(_CID, "backlight")
-            Alias(\ZRSC.LUID, _UID)
+            Name(_UID, 18)
             Name(_STA, 0x0B)
 
             Field(^IGD5, AnyAcc, NoLock, Preserve) {
@@ -61,9 +38,11 @@ DefinitionBlock("", "SSDT", 2, "hack", "IGPU", 0) {
 
                 LEVW = 0xC0000000
                 Local1 = LEVX >> 16
-                If (!Local1) { Local1 = \ZRSC.LMAX }
-                If (\ZRSC.LMAX != Local1) {
-                    Local0 = (((LEVX & 0xFFFF) * \ZRSC.LMAX) / Local1) | (\ZRSC.LMAX << 16)
+
+                Local2 = 0x1499
+                If (!Local1) { Local1 = Local2 }
+                If (Local2 != Local1) {
+                    Local0 = (((LEVX & 0xFFFF) * Local2) / Local1) | (Local2 << 16)
                     LEVX = Local0
                 }
             }

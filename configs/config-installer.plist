@@ -24,7 +24,7 @@
 				<true/>
 			</dict>
 			<key>Patches</key>
-			<array></array>
+			<array/>
 			<key>ReuseFFFF</key>
 			<false/>
 		</dict>
@@ -52,7 +52,7 @@
 			</dict>
 		</dict>
 		<key>SortedOrder</key>
-		<array></array>
+		<array/>
 	</dict>
 	<key>Boot</key>
 	<dict>
@@ -167,35 +167,15 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>10.12-BCM94352-5GHz-US-FCC-dv</string>
-				<key>Disabled</key>
-				<false/>
-				<key>Find</key>
-				<data>
-				gflSqgAAdSk=
-				</data>
-				<key>Name</key>
-				<string>AirPortBrcm4360</string>
-				<key>Replace</key>
-				<data>
-				gflSqgAAZpA=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Enable 9MB cursor bytes, 0x0a260006</string>
 				<key>Disabled</key>
 				<false/>
 				<key>Find</key>
-				<data>
-				BgAmCgEDAwMAAAACAAAwAQAAYAA=
-				</data>
+				<data>BgAmCgEDAwMAAAACAAAwAQAAYAA=</data>
 				<key>Name</key>
 				<string>AppleIntelFramebufferAzul</string>
 				<key>Replace</key>
-				<data>
-				BgAmCgEDAwMAAAACAAAwAQAAkAA=
-				</data>
+				<data>BgAmCgEDAwMAAAACAAAwAQAAkAA=</data>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -203,15 +183,11 @@
 				<key>Disabled</key>
 				<false/>
 				<key>Find</key>
-				<data>
-				AQAAdSI=
-				</data>
+				<data>AQAAdSI=</data>
 				<key>Name</key>
 				<string>IOGraphicsFamily</string>
 				<key>Replace</key>
-				<data>
-				AQAA6yI=
-				</data>
+				<data>AQAA6yI=</data>
 			</dict>
 		</array>
 	</dict>
@@ -224,8 +200,7 @@
 		<key>MLB</key>
 		<string></string>
 		<key>ROM</key>
-		<data>
-		</data>
+		<data></data>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>

@@ -27,9 +27,9 @@ if [ ! -d ./output ]; then mkdir ./output; fi && cd ./output/
 
 if [ ! -d ./local ]; then mkdir ./local; fi && cd ./local/
 if [ ! -d ./kexts ]; then mkdir ./kexts; fi && rm -Rf kexts/*
-if [ ! -d ./installme ]; then mkdir ./installme; fi && cd ./installme/
-if [ ! -d ./asussmc ]; then mkdir ./asussmc; fi && rm -Rf asussmc/*
-cd ../../
+# if [ ! -d ./installme ]; then mkdir ./installme; fi && cd ./installme/
+# if [ ! -d ./asussmc ]; then mkdir ./asussmc; fi && rm -Rf asussmc/*
+cd ../
 
 if [ ! -d ./efi ]; then mkdir ./efi; fi && cd ./efi/
 if [ ! -d ./kexts ]; then mkdir ./kexts; fi && rm -Rf kexts/*
@@ -87,7 +87,9 @@ rm -rf tmp
 cp -R ../smrttchpd/* ./local/kexts/
 
 cd ./local/kexts/
-cp -R VirtualSMC* FakePCIID* RealtekRTL8111* Lilu* WhateverGreen* AirportBrcmFixup* SMCBatteryManager* ApplePS2* AsusNB*  ../../efi/kexts/
+shopt -s extglob
+cp -R !(AppleALC*|AppleBacklightFixup*|AsusNBFnKeys*|*Brcm*|CodecCommander*|FakePCIID_Intel_HDMI_Audio*)  ../../efi/kexts/
+shopt -u extglob
 cd ../../
 
 
